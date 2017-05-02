@@ -10,29 +10,6 @@ function indent() {
   esac
 }
 
-# Prepare Edelog source files first
-echo "Edelog Buildpack: Install Yarn"
-npm install -g yarn
-
-echo "Edelog Buildpack: Install Gulp"
-yarn global add gulp
-
-echo "Edelog Buildpack: Install Styles"
-cd $1/frontend
-yarn
-
-echo "Edelog Buildpack: Build Styles"
-gulp build:rails
-
-echo "Edelog Buildpack: Install Angular"
-cd $1/angular-modules
-yarn
-
-echo "Edelog Buildpack: Build Angular"
-# todo: differentiate between dev and prod build
-yarn run build:rails:staging
-
-# Execute buildpacks
 unset GIT_DIR
 
 for BUILDPACK in $(cat $1/.buildpacks); do
