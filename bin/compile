@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
-
+sysctl fs.inotify.max_user_watches=524288
+sysctl -p
 function indent() {
   c='s/^/       /'
   case $(uname) in
